@@ -12,7 +12,12 @@ Package.onUse(function (api) {
 
   api.use([
     'ecmascript',
-  ]);
+    'less',
+  ], 'client');
 
-  api.mainModule('DateTimePicker.js');
+  api.mainModule('DateTimePicker.js', 'client');
+});
+
+Npm.depends({
+  jquery: '3.1.1',
 });
