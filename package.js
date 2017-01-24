@@ -14,5 +14,5 @@ Package.onUse(function (api) {
     'ecmascript',
   ]);
 
-  api.mainModule('meteor-react-date-time-picker.js');
+  api.mainModule('DateTimePicker.js');
 });
