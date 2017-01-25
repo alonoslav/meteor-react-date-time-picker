@@ -11,23 +11,29 @@ DateTimePickerStore.getInstanceById = function getInstanceById(id) {
   return this.has(id) ? this.get(id) : false;
 };
 
+const HOUR_VIEW = 0;
+const DAY_VIEW = 1;
+const MONTH_VIEW = 2;
 
-const getOptionsByType = (type) => {
-  // only for datepicker type
-  const datePickerOptions = {
-    minView: 2, // month view
+const typeOptions = {
+  datePicker: {
+    minView: MONTH_VIEW,
     format: 'yyyy-mm-dd',
-  };
+  },
 
-  // only for datetimepicker type
-  const dateTimePickerOptions = {
-    minView: 0, // hours view
+  dateTimePicker: {
+    minView: HOUR_VIEW,
     format: 'yyyy-mm-dd HH:ii P',
-  };
+  },
 
-  return type === 'datepicker' ? datePickerOptions : dateTimePickerOptions;
+  timePicker: {
+    startView: DAY_VIEW,
+    maxView: DAY_VIEW,
+    format: 'HH:ii P',
+  },
 };
 
+const getOptionsByType = (type) => (typeOptions.hasOwnProperty(type) ? typeOptions[type] : {});
 
 class DateTimePicker extends React.Component {
   componentDidMount() {
@@ -86,7 +92,7 @@ class DateTimePicker extends React.Component {
 DateTimePicker.propTypes = {
   id: PropTypes.string.isRequired,
 
-  type: PropTypes.oneOf(['datepicker', 'datetimepicker']),
+  type: PropTypes.oneOf(Object.keys(typeOptions)),
   options: PropTypes.object,
   classNames: PropTypes.string,
   onDateChanged: PropTypes.func,
