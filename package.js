@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'meteor-react-date-time-picker',
+  name: 'alonoslav:meteor-react-date-time-picker',
   version: '0.0.1',
   summary: 'React DateTimePicker component for MeteorJS',
   git: 'https://github.com/alonoslav/meteor-react-date-time-picker',

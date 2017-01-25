@@ -1,4 +1,4 @@
-# meteor-react-date-time-picker
+# alonoslav:meteor-react-date-time-picker
 
 This MeteorJS package provide React DateTimePicker component for your applications.
 
@@ -10,7 +10,10 @@ More about bootstrap datetimepicker used for this package you can read [here](ht
 
 ### Example
 
+#### Basic example
+
 ```jsx harmony
+import DateTimePicker from 'meteor/alonoslav:meteor-react-date-time-picker';
 
 const onDateChanged = (date) => console.log('DATE', date);
 

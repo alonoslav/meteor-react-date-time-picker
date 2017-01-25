@@ -5,6 +5,13 @@ import './lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min';
 import './lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css';
 
 
+export const DateTimePickerStore = new Map();
+
+DateTimePickerStore.getInstanceById = function getInstanceById(id) {
+  return this.has(id) ? this.get(id) : false;
+};
+
+
 const getOptionsByType = (type) => {
   // only for datepicker type
   const datePickerOptions = {
@@ -24,7 +31,7 @@ const getOptionsByType = (type) => {
 
 class DateTimePicker extends React.Component {
   componentDidMount() {
-    const { options = {}, type = 'datetimepicker', onDateChanged } = this.props;
+    const { id, options = {}, type = 'datetimepicker', onDateChanged } = this.props;
 
     const additionalOptions = getOptionsByType(type);
 
@@ -41,12 +48,24 @@ class DateTimePicker extends React.Component {
     this.dateTimePicker = $(this.refs.datetimepicker).datetimepicker(datepickerOptions);
 
     if (typeof onDateChanged === 'function') {
-      this.dateTimePicker.on('changeDate', (event) => {
-        onDateChanged(event.date);
+      this.dateTimePicker.on('changeDate', ({ date }) => {
+        this.dateTimePicker.datetimepicker('setDate', date);
+
+        onDateChanged(date, id);
       });
     }
+
+    if (!DateTimePickerStore.has(id)) {
+      DateTimePickerStore.set(id, this.dateTimePicker);
+    }
+
+    this.dateTimePicker.datetimepicker('setValue');
   }
 
+  componentWillUnmount() {
+    DateTimePickerStore.delete(this.props.id);
+    this.dateTimePicker.datetimepicker('remove');
+  }
 
   render() {
     const { id, classNames } = this.props;
@@ -58,14 +77,6 @@ class DateTimePicker extends React.Component {
           ref="datetimepicker" id={id}
           className={classNames}
         />
-
-        <span className="add-on">
-          <i className="icon-remove" />
-        </span>
-
-        <span className="add-on">
-          <i className="icon-calendar" />
-        </span>
       </div>
     );
   }
