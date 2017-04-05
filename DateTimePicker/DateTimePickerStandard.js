@@ -1,12 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 // eslint-disable-next-line import/no-unresolved
 import $ from 'jquery';
 
-import { DateTimePickerStore } from './DateTimePickerStore';
-import { getViewOptionsByType, dateTimePickerViewTypesList } from './view-types';
+import { DateTimePickerStore } from '../DateTimePickerStore';
+import { dateTimePickerPropTypes } from './prop-types';
+import { getViewOptionsByType } from './view-types';
 
-import './lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min';
-import './lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css';
+import '../lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min';
+import '../lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css';
 
 
 const defaultDateTimePickerOptions = {
@@ -18,7 +19,7 @@ const defaultDateTimePickerOptions = {
 };
 
 
-export default class DateTimePicker extends React.Component {
+export default class DateTimePickerStandard extends React.Component {
   constructor(props) {
     super(props);
 
@@ -48,7 +49,7 @@ export default class DateTimePicker extends React.Component {
 
     DateTimePickerStore.save(id, this.dateTimePicker);
 
-    this.dateTimePicker.datetimepicker('setValue');
+    // this.dateTimePicker.datetimepicker('setValue');
   }
 
   componentWillUnmount() {
@@ -76,17 +77,4 @@ export default class DateTimePicker extends React.Component {
 }
 
 
-DateTimePicker.defaultProps = {
-  options: {},
-  type: dateTimePickerViewTypesList[0],
-};
-
-
-DateTimePicker.propTypes = {
-  id: PropTypes.string.isRequired,
-
-  type: PropTypes.oneOf(dateTimePickerViewTypesList),
-  options: PropTypes.object,
-  classNames: PropTypes.string,
-  onDateChanged: PropTypes.func,
-};
+DateTimePickerStandard.propTypes = dateTimePickerPropTypes;
