@@ -1,7 +1,7 @@
 Package.describe({
   name: 'alonoslav:meteor-react-date-time-picker',
-  version: '0.0.2',
-  summary: 'React DateTimePicker component for MeteorJS',
+  version: '0.1.0',
+  summary: 'React DateTimePickerStandard component for MeteorJS',
   git: 'https://github.com/alonoslav/meteor-react-date-time-picker',
   documentation: 'README.md',
 });
@@ -15,7 +15,7 @@ Package.onUse(function (api) {
     'less',
   ], 'client');
 
-  api.mainModule('DateTimePicker.js', 'client');
+  api.mainModule('index.js', 'client');
 });
 
 Npm.depends({
