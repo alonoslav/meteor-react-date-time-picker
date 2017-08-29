@@ -62,7 +62,7 @@ export default class DateTimePickerStandard extends React.Component {
   }
 
   render() {
-    const { id, classNames } = this.props;
+    const { id, classNames, placeholder } = this.props;
 
     return (
       <div className="input-append date form_datetime">
@@ -70,6 +70,7 @@ export default class DateTimePickerStandard extends React.Component {
           type="text"
           ref={this.saveDateTimePicker} id={id}
           className={classNames}
+          placeholder={placeholder || ''}
         />
       </div>
     );
