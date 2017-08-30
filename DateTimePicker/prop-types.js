@@ -9,5 +9,6 @@ export const dateTimePickerPropTypes = {
   type: PropTypes.oneOf(dateTimePickerViewTypesList),
   options: PropTypes.object,
   classNames: PropTypes.string,
+  placeholder: PropTypes.string,
   onDateChanged: PropTypes.func,
 };
